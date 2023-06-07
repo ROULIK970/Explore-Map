@@ -1,9 +1,11 @@
-import React from 'react'
-import Map from './Components/map.jsx'
+import dynamic from 'next/dynamic';
 
+const MapWithNoSSR = dynamic(() => import('./Components/map'), { ssr: false });
 
 export default function Home() {
   return (
-    <main><Map /></main>
+    <main className='homePage'>
+      <MapWithNoSSR />
+    </main>
   );
 }
