@@ -62,7 +62,7 @@ const Map = () => {
   // fetchCountryDetails(countryCode);
 
   useEffect(() => {
-    if (typeof window !== "undefined") {
+    
       const map = L.map("map").setView([0, 0], 2);
 
       L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
@@ -70,7 +70,7 @@ const Map = () => {
           'Map data © <a href="https://openstreetmap.org">OpenStreetMap</a> contributors',
       }).addTo(map);
       map.on("click", handleCountryClick);
-    }
+    
     
   }, []);
 
