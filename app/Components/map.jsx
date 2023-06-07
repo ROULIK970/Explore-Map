@@ -50,7 +50,7 @@ const Map = () => {
 
     try {
       const response = await axios.get(
-        `http://api.geonames.org/countryCodeJSON?lat=${latitude}&lng=${longitude}&username=roulik`
+        `https://secure.geonames.org/countryCodeJSON?lat=${latitude}&lng=${longitude}&username=roulik`
       );
       const countryCode = response.data.countryCode;
       fetchCountryDetails(countryCode);
