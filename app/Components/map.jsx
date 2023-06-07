@@ -62,14 +62,19 @@ const Map = () => {
   // fetchCountryDetails(countryCode);
 
   useEffect(() => {
-    const map = L.map("map").setView([0, 0], 2);
+    if (typeof window !== "undefined") {
+      const map = L.map("map").setView([0, 0], 2);
 
-    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-      attribution:
-        'Map data © <a href="https://openstreetmap.org">OpenStreetMap</a> contributors',
-    }).addTo(map);
-    map.on("click", handleCountryClick);
+      L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        attribution:
+          'Map data © <a href="https://openstreetmap.org">OpenStreetMap</a> contributors',
+      }).addTo(map);
+      map.on("click", handleCountryClick);
+    }
+    
   }, []);
+
+  
 
   return (
     <section className="main-content" style={{ height: "100vh" }}>

@@ -1,12 +1,11 @@
-import Image from 'next/image'
-import styles from './page.module.css'
-import Map from './Components/map.jsx'
+import dynamic from "next/dynamic";
 
+const MapWithNoSSR = dynamic(() => import("./Components/map"), { ssr: false });
 
 export default function Home() {
   return (
-    <main className='homePage'>
-      <Map />
+    <main className="homePage">
+      <MapWithNoSSR />
     </main>
-  )
+  );
 }
