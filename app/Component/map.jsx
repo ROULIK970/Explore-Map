@@ -24,7 +24,9 @@ const Map = () => {
 
       setCountryDetails(response.data[0]);
 
-      //setViewCountry([countryDetails.latlng[0], countryDetails.latlng[1]], 4);
+      // setViewCountry(
+      //   [response.data[0].latlng[0], response.data[0].latlng[1]],   4
+      // );
     } catch (error) {
       alert("Pick a valid country");
     }
@@ -38,7 +40,6 @@ const Map = () => {
 
       const countryDetails = response.data[0];
       setCountryDetails(countryDetails);
-      console.log(countryDetails)
     } catch (error) {
       console.error("Error:", error);
     }
@@ -58,27 +59,26 @@ const Map = () => {
       console.error("Error:", error);
     }
   };
-  // const countryCode = e.target.feature.properties.iso_a2;
-  // fetchCountryDetails(countryCode);
 
   useEffect(() => {
-    
-      const map = L.map("map").setView([0, 0], 2);
+    const map = L.map("map").setView([0, 0], 2);
 
-      L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-        attribution:
-          'Map data © <a href="https://openstreetmap.org">OpenStreetMap</a> contributors',
-      }).addTo(map);
-      map.on("click", handleCountryClick);
-    
-    
+    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      maxZoom: 19,
+      attribution:
+        'Map data © <a href="https://openstreetmap.org">OpenStreetMap</a> contributors',
+    }).addTo(map);
+    map.on("click", handleCountryClick);
+
+    return () => {
+      map.off();
+      map.remove();
+    };
   }, []);
-
-  
 
   return (
     <section className="main-content" style={{ height: "100vh" }}>
-      <div className="search" >
+      <div className="search">
         <input
           type="text"
           placeholder="Search"
@@ -109,8 +109,7 @@ const Map = () => {
             <p>Capital: {countryDetails.capital}</p>
             <p>Population: {countryDetails.population}</p>
             <p>
-              Language:{" "}
-              {Object.values(countryDetails.languages).map((x) => x)}
+              Language: {Object.values(countryDetails.languages).map((x) => x)}
             </p>
             <p>
               Currency:{" "}
